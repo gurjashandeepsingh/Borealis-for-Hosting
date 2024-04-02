@@ -15,11 +15,14 @@ app.use("/vendor", businessRoutes);
 
 function mongoDBConnection() {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/borealis", {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      autoCreate: true,
-    })
+    .connect(
+      "mongodb+srv://gurjashandeepsinghwork1:kVTMDH0lWw5cR3OS@cluster0.brapcit.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+      {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        autoCreate: true,
+      }
+    )
     .then(() => {
       logger.info("Database connected");
     })
