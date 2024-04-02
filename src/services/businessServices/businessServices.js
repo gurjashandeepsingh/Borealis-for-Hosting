@@ -311,34 +311,14 @@ class BusinessServices {
     return updatedItem;
   }
 
-  async archiveOrUnarchiveAnItem(itemId) {
+  async archiveOrUnarchiveAnItem(itemId, isArchived) {
     const findItem = await Item.findOne({ _id: itemId });
-    if (!itemId) {
+    if (!findItem) {
       return "Item not found";
     }
     console.log(findItem);
-    if (findItem.isArchived === false) {
-      const archiveItem = await Item.findOneAndUpdate(
-        { _id: findItem._id },
-        { isArchived: true },
-        { new: true }
-      );
-      if (!archiveItem) {
-        return "Can't archive an item";
-      }
-      return archiveItem;
-    }
-    if (findItem.isArchived === true) {
-      const unarchiveItem = await Item.findOneAndUpdate(
-        { _id: findItem._id },
-        { isArchived: false },
-        { new: true }
-      );
-      if (!unarchiveItem) {
-        return "can't unarchive an item";
-      }
-      return unarchiveItem;
-    }
+    findItem.isArchived = isArchived;
+    await findItem.save();
     return;
   }
 }

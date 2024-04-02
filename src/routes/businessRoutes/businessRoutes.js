@@ -401,11 +401,12 @@ router.post(
 );
 
 const isArchivedValidation = [
-  body("itemId").notEmpty().withMessage("Provide itemId"),
+  query("itemId").notEmpty().withMessage("Provide itemId"),
+  body("isArchived").notEmpty().withMessage("Provide isArchived"),
 ];
 router.post(
   "/archiveItem",
-  // new AuthenticationMiddleware().isAuthenticate,
+  new AuthenticationMiddleware().isAuthenticate,
   isArchivedValidation,
   async (request, response) => {
     const validationError = validationResult(request);
@@ -413,9 +414,13 @@ router.post(
       throw new Error("Provide itemId");
     }
     try {
-      const { itemId } = request.body;
+      const { itemId } = request.query;
+      const { isArchived } = request.body;
       const ServiceInstance = await new BusinessServices();
-      const result = await ServiceInstance.archiveOrUnarchiveAnItem(itemId);
+      const result = await ServiceInstance.archiveOrUnarchiveAnItem(
+        itemId,
+        isArchived
+      );
       response.status(200).send(result);
     } catch (error) {
       response.status(400).send(error);
