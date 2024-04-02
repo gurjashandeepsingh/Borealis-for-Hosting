@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "0a991835-306e-4b88-bc0b-9aa0cbea58d9",
+		"name": "Borealis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27013950"
+	},
+	"item": [
+		{
+			"name": "RegisterBusiness",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"businessName\": \"Tasty Bites Restaurant\",\r\n  \"chefName\": \"John Smith\",\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"password123\",\r\n  \"confirmPassword\": \"password123\",\r\n  \"phone\": \"+1234567890\",\r\n  \"primaryCuisine\": \"Italian\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/registerBusiness",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"registerBusiness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginBusiness",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"john@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/loginVendor",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"loginVendor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateBusiness",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vendorId\": \"65fe30b7d7dc65dc1a18c6fd\",\r\n    \"name\": \"Restaurant 1\",\r\n    \"chefName\": \"John Smith 1\",\r\n    \"businessName\": \"test food business\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/updateBusinessInfo",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"updateBusinessInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AcceptOrders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"businessId\": \"6603e59dd52eb8d9bb722c9e\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/acceptingOrders",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"acceptingOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NotAcceptingOrders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{.}}/vendor/notAcceptingOrders?businessId=6603e59dd52eb8d9bb722c9e",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"notAcceptingOrders"
+					],
+					"query": [
+						{
+							"key": "businessId",
+							"value": "6603e59dd52eb8d9bb722c9e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddItemToMenu",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Sushi Combo Platter\",\r\n  \"price\": 18.99,\r\n  \"description\": \"Assorted selection of fresh nigiri and maki sushi rolls, served with soy sauce, wasabi, and pickled ginger.\",\r\n  \"tag\": [\"sushi\", \"Japanese\", \"seafood\"],\r\n  \"menuId\": \"6603e59dd52eb8d9bb722ca0\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/addItem",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"addItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateItem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"itemId\": \"6603fe2cef1eafe0cc0351f6\",\r\n    \"price\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/updateitem",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"updateitem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ShowItemsVendor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"menuId\": \"6603e59dd52eb8d9bb722ca0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/showItemsVendor",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"showItemsVendor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveItemFromMenu",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"menuId\": \"6603e59dd52eb8d9bb722ca0\",\r\n    \"itemId\": \"6603fe2cef1eafe0cc0351f6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/removeItem",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"removeItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MakeItemAvailable",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/vendor/makeDishAvailable?itemId=66064789616a0af7b04450ed",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"makeDishAvailable"
+					],
+					"query": [
+						{
+							"key": "itemId",
+							"value": "66064789616a0af7b04450ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MakeItemUnavailable",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{.}}/vendor/makeDishUnavailable?itemId=66064789616a0af7b04450ed",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"makeDishUnavailable"
+					],
+					"query": [
+						{
+							"key": "itemId",
+							"value": "66064789616a0af7b04450ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MakeItemFeatured",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{.}}/vendor/makeItemFeatured/?itemId=66064789616a0af7b04450ed",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"vendor",
+						"makeItemFeatured",
+						""
+					],
+					"query": [
+						{
+							"key": "itemId",
+							"value": "66064789616a0af7b04450ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MakeItemUnfeatured",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"example@example.com\",\r\n  \"name\": \"John Doe\",\r\n  \"password\": \"password123\",\r\n  \"confirmPassword\": \"password123\",\r\n  \"phone\": \"123-456-7890\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/user/egisterUser",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"egisterUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"example3@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/user/loginUser",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"loginUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"65fd810f8879468169a9f0ec\",\r\n    \"name\": \"Johen doeee\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/user/updateUser",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"user",
+						"updateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindBusiness",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"businessId\": \"6603e59dd52eb8d9bb722c9e\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/user/findBusiness",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"user",
+						"findBusiness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ShowAllItemsUser",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "FindItemForUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"itemId\":\"6603fe2cef1eafe0cc0351f6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/user/findItemUser",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"user",
+						"findItemUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddToCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartId\": 1,\r\n    \"item\": \r\n    {    \"itemId\": \"6603fe2cef1eafe0cc0351f6\",\r\n        \"quantity\": 2\r\n    },\r\n    \"userId\": \"65fd812f62667fcc351316d1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/user/addToCart",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"user",
+						"addToCart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetActiveCart",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "OrderPlacement",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartId\": \"66056c118ceead77659f3034\",\r\n    \"shippingAddress\": \"xdkjfb\",\r\n    \"userId\": \"65fd812f62667fcc351316d1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/user/orderPlacement",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"user",
+						"orderPlacement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrderHIstory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"65fd812f62667fcc351316d1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{.}}/user/orderHistoryUser",
+					"host": [
+						"{{.}}"
+					],
+					"path": [
+						"user",
+						"orderHistoryUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrderDetailsUser",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "SearchString",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "ShowAllBusiness",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": ".",
+			"value": "localhost:3000"
+		}
+	]
+}
