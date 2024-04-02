@@ -2,6 +2,7 @@ import { AuthenticationMiddleware } from "../../middleware/jwtMiddleware.js";
 import { Business } from "../../models/businessModel.js";
 import { Menu } from "../../models/menuModel.js";
 import { Item } from "../../models/itemModel.js";
+import { Schedule } from "../../models/scheduleModel.js";
 import bcrypt from "bcrypt";
 
 class BusinessServices {
@@ -53,13 +54,17 @@ class BusinessServices {
           nonVeg,
           vegan,
           eggitarian,
+          calender,
         });
         const registeredBusiness = await newBusiness.save();
         const newMenu = await new Menu({ businessId: newBusiness._id });
         const registeredMenu = await newMenu.save();
         registeredBusiness.menuId = registeredMenu._id;
         await registeredBusiness.save();
-        return { registeredBusiness, registeredMenu };
+        const registeredSchedule = await Schedule.insertMany(calender);
+
+        await registeredSchedule.save();
+        return { registeredBusiness, registeredMenu, registeredSchedule };
       } else {
         throw new Error("Email already exists");
       }
@@ -83,7 +88,6 @@ class BusinessServices {
         const token = await jwtTokenInstance.generateToken(searchVendor._id);
         const findMenu = await Menu.findOne({ businessId: searchVendor._id });
         const findItems = await Item.find({ menuId: findMenu._id });
-
         return { token, searchVendor, findMenu };
       } else {
         console.log("Token Invalid");
@@ -207,6 +211,16 @@ class BusinessServices {
     }
   }
 
+  async showItem(itemId) {
+    const findItem = await Item.findOne({
+      _id: itemId,
+    });
+    if (!findItem) {
+      return "item not found";
+    }
+    return findItem;
+  }
+
   async showAllItems(menuId) {
     const items = await Item.find({ menuId: menuId });
     if (!items) {
@@ -295,6 +309,37 @@ class BusinessServices {
       { new: true }
     );
     return updatedItem;
+  }
+
+  async archiveOrUnarchiveAnItem(itemId) {
+    const findItem = await Item.findOne({ _id: itemId });
+    if (!itemId) {
+      return "Item not found";
+    }
+    console.log(findItem);
+    if (findItem.isArchived === false) {
+      const archiveItem = await Item.findOneAndUpdate(
+        { _id: findItem._id },
+        { isArchived: true },
+        { new: true }
+      );
+      if (!archiveItem) {
+        return "Can't archive an item";
+      }
+      return archiveItem;
+    }
+    if (findItem.isArchived === true) {
+      const unarchiveItem = await Item.findOneAndUpdate(
+        { _id: findItem._id },
+        { isArchived: false },
+        { new: true }
+      );
+      if (!unarchiveItem) {
+        return "can't unarchive an item";
+      }
+      return unarchiveItem;
+    }
+    return;
   }
 }
 

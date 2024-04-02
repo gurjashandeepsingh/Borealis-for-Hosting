@@ -41,6 +41,7 @@ router.post(
         nonVeg,
         vegan,
         eggitarian,
+        calender,
       } = request.body;
       const registrationServiceInstance = new BusinessServices();
       const register = await registrationServiceInstance.registerBusiness(
@@ -55,7 +56,8 @@ router.post(
         veg,
         nonVeg,
         vegan,
-        eggitarian
+        eggitarian,
+        calender
       );
       response.status(200).send(register);
     } catch (error) {
@@ -259,6 +261,29 @@ router.post(
   }
 );
 
+const showItemValidation = [
+  query("itemId").notEmpty().withMessage("Provide ItemId"),
+];
+router.get(
+  "/showItem",
+  new AuthenticationMiddleware().isAuthenticate,
+  showItemValidation,
+  async (request, response) => {
+    const validationError = validationResult(request);
+    if (!validationError.isEmpty()) {
+      logger.error("Provide all paramters");
+    }
+    try {
+      const { itemId } = request.query;
+      const ServiceInstance = await new BusinessServices();
+      const result = await ServiceInstance.showItem(itemId);
+      response.status(200).send(result);
+    } catch (error) {
+      response.status(400).send(error);
+    }
+  }
+);
+
 const showItemsValidation = [
   query("menuId").notEmpty().withMessage("Can't be Empty"),
 ];
@@ -376,26 +401,26 @@ router.post(
 );
 
 const isArchivedValidation = [
-  query("itemId").notEmpty().withMessage("Provide itemId"),
-  body("Value").isBoolean().withMessage("Provide value"),
+  body("itemId").notEmpty().withMessage("Provide itemId"),
 ];
 router.post(
   "/archiveItem",
-  new AuthenticationMiddleware().isAuthenticate,
-  UnfeaturedItemValidation,
+  // new AuthenticationMiddleware().isAuthenticate,
+  isArchivedValidation,
   async (request, response) => {
     const validationError = validationResult(request);
     if (!validationError.isEmpty()) {
       throw new Error("Provide itemId");
     }
     try {
-      const { itemId } = request.query;
+      const { itemId } = request.body;
       const ServiceInstance = await new BusinessServices();
-      const result = await ServiceInstance.makeItemUnfeatured(itemId);
+      const result = await ServiceInstance.archiveOrUnarchiveAnItem(itemId);
       response.status(200).send(result);
     } catch (error) {
       response.status(400).send(error);
     }
   }
 );
+
 export { router as businessRoutes };
