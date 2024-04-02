@@ -1,4 +1,4 @@
-import { User } from "../../models/userMOdel.js";
+import { User } from "../../models/userModel.js";
 import { AuthenticationMiddleware } from "../../middleware/jwtMiddleware.js";
 import { Menu } from "../../models/menuModel.js";
 import { Business } from "../../models/businessModel.js";
