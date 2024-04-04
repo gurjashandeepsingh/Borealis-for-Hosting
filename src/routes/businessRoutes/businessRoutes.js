@@ -41,7 +41,6 @@ router.post(
         nonVeg,
         vegan,
         eggitarian,
-        calender,
       } = request.body;
       const registrationServiceInstance = new BusinessServices();
       const register = await registrationServiceInstance.registerBusiness(
@@ -57,7 +56,7 @@ router.post(
         nonVeg,
         vegan,
         eggitarian,
-        calender
+        
       );
       response.status(200).send(register);
     } catch (error) {
